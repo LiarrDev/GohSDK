@@ -36,7 +36,7 @@ public class ResourceUtil {
         return getResourceId(context, name, "drawable");
     }
 
-    public static int getComponentId(final Context context, final String name) {
+    public static int getViewId(final Context context, final String name) {
         return getResourceId(context, name, "id");
     }
 

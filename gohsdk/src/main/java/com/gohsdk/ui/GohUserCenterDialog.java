@@ -41,7 +41,7 @@ public class GohUserCenterDialog extends AlertDialog {
             }
         }
 
-        ImageButton ibBack = rootView.findViewById(ResourceUtil.getComponentId(getContext(), "btn_back"));
+        ImageButton ibBack = rootView.findViewById(ResourceUtil.getViewId(getContext(), "btn_back"));
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
