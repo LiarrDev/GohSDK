@@ -2,20 +2,19 @@ package com.gohsdk.utils;
 
 import android.util.Log;
 
-public class LogUtil {
+import static android.util.Log.DEBUG;
+import static android.util.Log.ERROR;
+import static android.util.Log.INFO;
+import static android.util.Log.VERBOSE;
+import static android.util.Log.WARN;
 
-    private static final int VERBOSE = 1;
-    private static final int DEBUG = 2;
-    private static final int INFO = 3;
-    private static final int WARN = 4;
-    private static final int ERROR = 5;
-    private static final int NOTHING = 6;
+public class LogUtil {
 
     private static final int LOGGER_MAX_LENGTH = 3 * 1024;
 
     private static final String TAG = "GohSDK";
 
-    private static final int level = VERBOSE;
+    private static int level = VERBOSE;
 
     public static void v(String msg) {
         v(TAG, msg);
