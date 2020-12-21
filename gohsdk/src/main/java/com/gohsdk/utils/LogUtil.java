@@ -11,9 +11,11 @@ public class LogUtil {
     private static final int ERROR = 5;
     private static final int NOTHING = 6;
 
+    private static final int LOGGER_MAX_LENGTH = 3 * 1024;
+
     private static final String TAG = "GohSDK";
 
-    private static int level = VERBOSE;
+    private static final int level = VERBOSE;
 
     public static void v(String msg) {
         v(TAG, msg);
@@ -21,7 +23,7 @@ public class LogUtil {
 
     public static void v(String tag, String msg) {
         if (level <= VERBOSE) {
-            Log.v(tag, msg);
+            log(tag, msg, VERBOSE);
         }
     }
 
@@ -31,7 +33,7 @@ public class LogUtil {
 
     public static void d(String tag, String msg) {
         if (level <= DEBUG) {
-            Log.d(tag, msg);
+            log(tag, msg, DEBUG);
         }
     }
 
@@ -41,7 +43,7 @@ public class LogUtil {
 
     public static void i(String tag, String msg) {
         if (level <= INFO) {
-            Log.i(tag, msg);
+            log(tag, msg, INFO);
         }
     }
 
@@ -51,7 +53,7 @@ public class LogUtil {
 
     public static void w(String tag, String msg) {
         if (level <= WARN) {
-            Log.w(tag, msg);
+            log(tag, msg, WARN);
         }
     }
 
@@ -61,7 +63,43 @@ public class LogUtil {
 
     public static void e(String tag, String msg) {
         if (level <= ERROR) {
-            Log.e(tag, msg);
+            log(tag, msg, ERROR);
+        }
+    }
+
+    /**
+     * 对长度进行截断，避免 Log 长度限制 4k 导致显示不全
+     */
+    private static void log(String tag, String msg, int level) {
+        if (tag == null || tag.length() <= 0 || msg == null || msg.length() <= 0) {
+            return;
+        }
+        if (msg.length() > LOGGER_MAX_LENGTH) {
+            while (msg.length() > LOGGER_MAX_LENGTH) {
+                print(tag, msg.substring(0, LOGGER_MAX_LENGTH), level);
+                msg = msg.substring(LOGGER_MAX_LENGTH);
+            }
+        }
+        print(tag, msg, level);
+    }
+
+    private static void print(String tag, String msg, int level) {
+        switch (level) {
+            case VERBOSE:
+                Log.v(tag, msg);
+                break;
+            case DEBUG:
+                Log.d(tag, msg);
+                break;
+            case INFO:
+                Log.i(tag, msg);
+                break;
+            case WARN:
+                Log.w(tag, msg);
+                break;
+            case ERROR:
+                Log.e(tag, msg);
+                break;
         }
     }
 }
