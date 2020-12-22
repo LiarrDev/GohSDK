@@ -61,7 +61,7 @@ public class HttpUtil {
                         response.append(line);
                     }
                     int responseCode = connection.getResponseCode();
-                    if (responseCode == 200) {
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
                         handleResponse(callback, response.toString());
                     } else {
                         handleError(callback, responseCode, new Exception("Request Failed, Code: " + responseCode));
