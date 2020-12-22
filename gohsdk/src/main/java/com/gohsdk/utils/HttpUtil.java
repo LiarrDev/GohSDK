@@ -44,7 +44,9 @@ public class HttpUtil {
                         for (Map.Entry<String, String> entry : sets) {
                             sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
                         }
-                        address += "?" + sb.substring(0, sb.length() - 1);
+                        if (sb.length() > 0) {
+                            address += "?" + sb.substring(0, sb.length() - 1);
+                        }
                     }
                     URL url = new URL(address);
                     connection = (HttpURLConnection) url.openConnection();
