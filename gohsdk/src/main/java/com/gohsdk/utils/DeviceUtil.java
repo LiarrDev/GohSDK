@@ -3,6 +3,8 @@ package com.gohsdk.utils;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 
 public class DeviceUtil {
 
@@ -39,6 +41,18 @@ public class DeviceUtil {
      */
     public static String getPhoneModel() {
         return android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL;
+    }
+
+    /**
+     * 网络运营商
+     */
+    public static String getNetworkOperatorName(Context context) {
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        if (tm == null) {
+            return "";
+        }
+        String networkOperatorName = tm.getNetworkOperatorName();
+        return TextUtils.isEmpty(networkOperatorName) ? "" : networkOperatorName;
     }
 
     /**
