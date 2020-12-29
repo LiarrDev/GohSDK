@@ -6,34 +6,36 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import com.gohsdk.GohBaseApplication;
+
 public class DeviceUtil {
 
     /**
      * 判断是否为竖屏
      */
-    public static boolean isPortrait(Context context) {
-        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+    public static boolean isPortrait() {
+        return GohBaseApplication.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
-    
+
     /**
      * 屏幕宽度
      */
-    public static int getScreenWidth(Context context) {
-        return context.getResources().getDisplayMetrics().widthPixels;
+    public static int getScreenWidth() {
+        return GohBaseApplication.getContext().getResources().getDisplayMetrics().widthPixels;
     }
 
     /**
      * 屏幕高度
      */
-    public static int getScreenHeight(Context context) {
-        return context.getResources().getDisplayMetrics().heightPixels;
+    public static int getScreenHeight() {
+        return GohBaseApplication.getContext().getResources().getDisplayMetrics().heightPixels;
     }
 
     /**
      * 屏幕尺寸
      */
-    public static String getScreenSize(Context context) {
-        return getScreenHeight(context) + "×" + getScreenWidth(context);
+    public static String getScreenSize() {
+        return getScreenHeight() + "×" + getScreenWidth();
     }
 
     /**
@@ -53,8 +55,8 @@ public class DeviceUtil {
     /**
      * 网络运营商
      */
-    public static String getNetworkOperatorName(Context context) {
-        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+    public static String getNetworkOperatorName() {
+        TelephonyManager tm = (TelephonyManager) GohBaseApplication.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         if (tm == null) {
             return "";
         }
@@ -65,7 +67,7 @@ public class DeviceUtil {
     /**
      * ANDROID_ID
      */
-    public static String getAndroidId(Context context) {
-        return Settings.System.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+    public static String getAndroidId() {
+        return Settings.System.getString(GohBaseApplication.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 }

@@ -2,7 +2,6 @@ package com.gohsdk.ui;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,14 +35,13 @@ public class GohUserCenterDialogFragment extends DialogFragment {
         if (window != null) {
             window.setBackgroundDrawableResource(android.R.color.transparent);
             WindowManager.LayoutParams params = window.getAttributes();
-            DisplayMetrics dm = getResources().getDisplayMetrics();
-            if (DeviceUtil.isPortrait(getActivity())) {      // 竖屏
+            if (DeviceUtil.isPortrait()) {      // 竖屏
                 window.setGravity(Gravity.BOTTOM);
-                params.height = dm.heightPixels / 3 * 2;
+                params.height = DeviceUtil.getScreenHeight() / 3 * 2;
                 params.width = WindowManager.LayoutParams.MATCH_PARENT;
             } else {        // 横屏
                 window.setGravity(Gravity.START);
-                params.width = dm.widthPixels / 2;
+                params.width = DeviceUtil.getScreenWidth() / 2;
                 params.height = WindowManager.LayoutParams.MATCH_PARENT;
             }
         }
