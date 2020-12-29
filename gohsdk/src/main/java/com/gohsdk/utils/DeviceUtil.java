@@ -44,6 +44,13 @@ public class DeviceUtil {
     }
 
     /**
+     * 系统版本
+     */
+    public static String getOsVersion() {
+        return android.os.Build.VERSION.RELEASE;
+    }
+
+    /**
      * 网络运营商
      */
     public static String getNetworkOperatorName(Context context) {
