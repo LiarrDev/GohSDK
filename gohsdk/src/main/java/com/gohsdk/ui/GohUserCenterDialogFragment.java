@@ -13,6 +13,9 @@ import android.widget.ImageButton;
 import com.gohsdk.utils.DeviceUtil;
 import com.gohsdk.utils.ResourceUtil;
 
+/**
+ * 横屏状态下显示异常，暂不使用
+ */
 public class GohUserCenterDialogFragment extends DialogFragment {
 
     @Override
@@ -37,7 +40,7 @@ public class GohUserCenterDialogFragment extends DialogFragment {
             WindowManager.LayoutParams params = window.getAttributes();
             if (DeviceUtil.isPortrait()) {      // 竖屏
                 window.setGravity(Gravity.BOTTOM);
-                params.height = DeviceUtil.getScreenHeight() / 3 * 2;
+                params.height = DeviceUtil.getScreenHeight() / 4 * 3;
                 params.width = WindowManager.LayoutParams.MATCH_PARENT;
             } else {        // 横屏
                 window.setGravity(Gravity.START);

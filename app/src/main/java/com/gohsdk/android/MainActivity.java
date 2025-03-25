@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 import com.gohsdk.ui.GohUserCenterDialog;
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener {
 
     Button btnUserCenter;
 
@@ -20,7 +21,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btn_user_center){
+        if (view.getId() == R.id.btn_user_center) {
             GohUserCenterDialog dialog = new GohUserCenterDialog(this);
             dialog.show();
         }

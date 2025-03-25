@@ -30,7 +30,7 @@ public class GohUserCenterDialog extends AlertDialog {
             WindowManager.LayoutParams params = window.getAttributes();
             if (DeviceUtil.isPortrait()) {      // 竖屏
                 window.setGravity(Gravity.BOTTOM);
-                params.height = DeviceUtil.getScreenHeight() / 2;
+                params.height = DeviceUtil.getScreenHeight() / 4 * 3;
                 params.width = WindowManager.LayoutParams.MATCH_PARENT;
             } else {        // 横屏
                 window.setGravity(Gravity.START);
