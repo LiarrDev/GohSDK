@@ -1,18 +1,12 @@
 package com.gohsdk.android;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
-import android.content.res.Configuration;
-import android.os.Build;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import com.gohsdk.ui.GohUserCenterDialog;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener{
 
     Button btnUserCenter;
 
@@ -23,6 +17,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnUserCenter = findViewById(R.id.btn_user_center);
         btnUserCenter.setOnClickListener(this);
     }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.btn_user_center){
+            GohUserCenterDialog dialog = new GohUserCenterDialog(this);
+            dialog.show();
+        }
+    }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -37,22 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
-    }
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btn_user_center:
-                GohUserCenterDialog dialog = new GohUserCenterDialog(this);
-                dialog.show();
-                break;
-            default:break;
         }
     }
 }

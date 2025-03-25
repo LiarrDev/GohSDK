@@ -1,3 +1,0 @@
-include ':gohsdk'
-include ':app'
-rootProject.name = "GohSDK"
