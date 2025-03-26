@@ -1,6 +1,8 @@
 package com.gohsdk.utils;
 
+import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +11,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,14 +21,15 @@ public class HttpUtil {
 
     static {
         executor = Executors.newFixedThreadPool(5);
-        mHandler = new Handler();
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     public interface Callback {
 
         void onResponse(String response);
 
-        void onError(int responseCode, Exception e);
+        default void onError(int responseCode, Exception e) {
+        }
     }
 
     public static void doGet(final String requestUrl, final Map<String, String> params, final Callback callback) {
@@ -37,17 +39,13 @@ public class HttpUtil {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
                 try {
-                    String address = requestUrl;
+                    Uri.Builder builder = Uri.parse(requestUrl).buildUpon();
                     if (params != null) {
-                        StringBuilder sb = new StringBuilder();
-                        Set<Map.Entry<String, String>> sets = params.entrySet();
-                        for (Map.Entry<String, String> entry : sets) {
-                            sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
-                        }
-                        if (sb.length() > 0) {
-                            address += "?" + sb.substring(0, sb.length() - 1);
+                        for (Map.Entry<String, String> entry : params.entrySet()) {
+                            builder.appendQueryParameter(entry.getKey(), entry.getValue());
                         }
                     }
+                    String address = builder.toString();
                     URL url = new URL(address);
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setConnectTimeout(8000);
@@ -105,5 +103,10 @@ public class HttpUtil {
                 }
             });
         }
+    }
+
+    public static void release() {
+        mHandler.removeCallbacksAndMessages(null);
+        executor.shutdown();
     }
 }

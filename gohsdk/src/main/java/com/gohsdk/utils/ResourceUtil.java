@@ -2,77 +2,80 @@ package com.gohsdk.utils;
 
 import android.content.Context;
 
+import com.gohsdk.GohBaseApplication;
+
 public class ResourceUtil {
 
-    public static int getResourceId(final Context context, final String name, final String defType) {
+    public static int getResourceId(final String name, final String defType) {
+        Context context = GohBaseApplication.getContext();
         return context.getResources().getIdentifier(name, defType, context.getPackageName());
     }
 
-    public static int getAnimId(final Context context, final String name) {
-        return getResourceId(context, name, "anim");
+    public static int getAnimId(final String name) {
+        return getResourceId(name, "anim");
     }
 
-    public static int getAnimatorId(final Context context, final String name) {
-        return getResourceId(context, name, "animator");
+    public static int getAnimatorId(final String name) {
+        return getResourceId(name, "animator");
     }
 
-    public static int getAttrId(final Context context, final String name) {
-        return getResourceId(context, name, "attr");
+    public static int getAttrId(final String name) {
+        return getResourceId(name, "attr");
     }
 
-    public static int getBoolId(final Context context, final String name) {
-        return getResourceId(context, name, "bool");
+    public static int getBoolId(final String name) {
+        return getResourceId(name, "bool");
     }
 
-    public static int getColorId(final Context context, final String name) {
-        return getResourceId(context, name, "color");
+    public static int getColorId(final String name) {
+        return getResourceId(name, "color");
     }
 
-    public static int getDimenId(final Context context, final String name) {
-        return getResourceId(context, name, "dimen");
+    public static int getDimenId(final String name) {
+        return getResourceId(name, "dimen");
     }
 
-    public static int getDrawableId(final Context context, final String name) {
-        return getResourceId(context, name, "drawable");
+    public static int getDrawableId(final String name) {
+        return getResourceId(name, "drawable");
     }
 
-    public static int getViewId(final Context context, final String name) {
-        return getResourceId(context, name, "id");
+    public static int getViewId(final String name) {
+        return getResourceId(name, "id");
     }
 
-    public static int getIntegerId(final Context context, final String name) {
-        return getResourceId(context, name, "integer");
+    public static int getIntegerId(final String name) {
+        return getResourceId(name, "integer");
     }
 
-    public static int getInterpolatorId(final Context context, final String name) {
-        return getResourceId(context, name, "interpolator");
+    public static int getInterpolatorId(final String name) {
+        return getResourceId(name, "interpolator");
     }
 
-    public static int getLayoutId(final Context context, final String name) {
-        return getResourceId(context, name, "layout");
+    public static int getLayoutId(final String name) {
+        return getResourceId(name, "layout");
     }
 
-    public static int getMipmapId(final Context context, final String name) {
-        return getResourceId(context, name, "mipmap");
+    public static int getMipmapId(final String name) {
+        return getResourceId(name, "mipmap");
     }
 
-    public static int getPluralsId(final Context context, final String name) {
-        return getResourceId(context, name, "plurals");
+    public static int getPluralsId(final String name) {
+        return getResourceId(name, "plurals");
     }
 
-    public static int getStringId(final Context context, final String name) {
-        return getResourceId(context, name, "string");
+    public static int getStringId(final String name) {
+        return getResourceId(name, "string");
     }
 
-    public static int getStyleId(final Context context, final String name) {
-        return getResourceId(context, name, "style");
+    public static int getStyleId(final String name) {
+        return getResourceId(name, "style");
     }
 
-    public static int getStyleableId(final Context context, final String name) {
-        return getResourceId(context, name, "styleable");
+    public static int getStyleableId(final String name) {
+        return getResourceId(name, "styleable");
     }
 
-    public static int getXmlId(final Context context, final String name) {
-        return getResourceId(context, name, "xml");
+    public static int getXmlId(final String name) {
+        return getResourceId(name, "xml");
     }
 }

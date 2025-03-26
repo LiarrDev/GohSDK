@@ -21,7 +21,7 @@ public class GohUserCenterDialog extends AlertDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View rootView = View.inflate(getContext(), ResourceUtil.getLayoutId(getContext(), "goh_user_center_dialog"), null);
+        View rootView = View.inflate(getContext(), ResourceUtil.getLayoutId("goh_user_center_dialog"), null);
         setContentView(rootView);
 
         Window window = getWindow();
@@ -39,7 +39,7 @@ public class GohUserCenterDialog extends AlertDialog {
             }
         }
 
-        ImageButton ibBack = rootView.findViewById(ResourceUtil.getViewId(getContext(), "btn_back"));
+        ImageButton ibBack = rootView.findViewById(ResourceUtil.getViewId("btn_back"));
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

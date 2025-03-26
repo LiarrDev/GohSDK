@@ -20,8 +20,8 @@ public class GohUserCenterDialogFragment extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(ResourceUtil.getLayoutId(getActivity(), "goh_user_center_dialog"), null);
-        ImageButton ibBack = rootView.findViewById(ResourceUtil.getViewId(getActivity(), "btn_back"));
+        View rootView = inflater.inflate(ResourceUtil.getLayoutId("goh_user_center_dialog"), null);
+        ImageButton ibBack = rootView.findViewById(ResourceUtil.getViewId("btn_back"));
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
