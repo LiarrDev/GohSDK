@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.gohsdk.ui.GohUserCenterDialog;
+import com.gohsdk.ui.view.FloatingView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -17,6 +18,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         btnUserCenter = findViewById(R.id.btn_user_center);
         btnUserCenter.setOnClickListener(this);
+        findViewById(R.id.btn_float_ball).setOnClickListener(this);
     }
 
     @Override
@@ -24,6 +26,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (view.getId() == R.id.btn_user_center) {
             GohUserCenterDialog dialog = new GohUserCenterDialog(this);
             dialog.show();
+        } else if (view.getId() == R.id.btn_float_ball) {
+            new FloatingView(this, R.mipmap.ic_launcher).show();
         }
     }
 
