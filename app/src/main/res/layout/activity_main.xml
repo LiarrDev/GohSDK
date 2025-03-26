@@ -23,10 +23,70 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="登录" />
+
+            <Button
+                android:id="@+id/btn_switch_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="切换账号" />
+
+            <Button
+                android:id="@+id/btn_pay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="支付" />
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="注销" />
+
+            <Button
+                android:id="@+id/btn_exit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="退出游戏" />
+
+            <Button
+                android:id="@+id/btn_server"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="选服" />
+
+            <Button
+                android:id="@+id/btn_role_create"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="创建角色" />
+
+            <Button
+                android:id="@+id/btn_role_level_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="提升等级" />
+
+            <Button
+                android:id="@+id/btn_enter_game"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="进入游戏" />
+
+            <Button
                 android:id="@+id/btn_user_center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="个人中心" />
+
+            <Button
+                android:id="@+id/btn_float_ball"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="悬浮球" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
