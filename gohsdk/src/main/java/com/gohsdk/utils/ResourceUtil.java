@@ -4,6 +4,11 @@ import android.content.Context;
 
 import com.gohsdk.GohBaseApplication;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class ResourceUtil {
 
     public static int getResourceId(final String name, final String defType) {
@@ -77,5 +82,38 @@ public class ResourceUtil {
 
     public static int getXmlId(final String name) {
         return getResourceId(name, "xml");
+    }
+
+    public static String readAssets2String(final String assetsFilePath) {
+        StringBuilder sb = new StringBuilder();
+        InputStream inputStream = null;
+        InputStreamReader inputStreamReader = null;
+        BufferedReader bufferedReader = null;
+        try {
+            inputStream = GohBaseApplication.getContext().getAssets().open(assetsFilePath);
+            inputStreamReader = new InputStreamReader(inputStream);
+            bufferedReader = new BufferedReader(inputStreamReader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                if (inputStreamReader != null) {
+                    inputStreamReader.close();
+                }
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
     }
 }
