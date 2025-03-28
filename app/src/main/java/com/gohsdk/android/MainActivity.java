@@ -7,7 +7,6 @@ import android.view.View;
 import com.gohsdk.core.GohSDK;
 import com.gohsdk.core.IPlatformCallback;
 import com.gohsdk.ui.GohUserCenterDialog;
-import com.gohsdk.ui.view.FloatingView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -47,11 +46,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         } else if (view.getId() == R.id.btn_user_center) {
             GohUserCenterDialog dialog = new GohUserCenterDialog(this);
             dialog.show();
-        } else if (view.getId() == R.id.btn_float_ball) {
-            new FloatingView(this, R.mipmap.ic_launcher).show();
         }
     }
-
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
