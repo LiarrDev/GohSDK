@@ -19,6 +19,7 @@ public class GohFloatingBall implements IFloatingView {
     private View floatingRoot;
     private ImageView floatingIcon;
     private boolean isShowing = false;
+    private View.OnClickListener listener;
 
     @Override
     public void show() {
@@ -29,12 +30,13 @@ public class GohFloatingBall implements IFloatingView {
             WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
             layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
             layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-            layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE ;
+            layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
             layoutParams.gravity = Gravity.TOP | Gravity.START;
             layoutParams.format = PixelFormat.TRANSLUCENT;
             layoutParams.y = DeviceUtil.getScreenHeight() / 5;
             floatingRoot.setOnTouchListener(new FloatingViewTouchListener(layoutParams, windowManager));
             windowManager.addView(floatingRoot, layoutParams);
+            floatingRoot.setOnClickListener(listener);
             isShowing = true;
         }
     }
@@ -54,5 +56,12 @@ public class GohFloatingBall implements IFloatingView {
     @Override
     public boolean isShowing() {
         return isShowing;
+    }
+
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
+        if (floatingRoot != null) {
+            floatingRoot.setOnClickListener(listener);
+        }
     }
 }

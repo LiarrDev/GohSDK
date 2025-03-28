@@ -9,10 +9,11 @@ import com.gohsdk.utils.DeviceUtil;
 
 public class FloatingViewTouchListener implements View.OnTouchListener {
 
-    private WindowManager.LayoutParams params;
-    private WindowManager windowManager;
-    private int x;
-    private int y;
+    private final WindowManager.LayoutParams params;
+    private final WindowManager windowManager;
+    private int eventX, eventY;
+    private int downX, downY;
+    private final float performClickDistance = 8F;
 
     public FloatingViewTouchListener(WindowManager.LayoutParams params, WindowManager windowManager) {
         this.params = params;
@@ -23,30 +24,36 @@ public class FloatingViewTouchListener implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                x = (int) event.getRawX();
-                y = (int) event.getRawY();
+                eventX = (int) event.getRawX();
+                eventY = (int) event.getRawY();
+                downX = eventX;
+                downY = eventY;
                 break;
             case MotionEvent.ACTION_MOVE:
                 int nowX = (int) event.getRawX();
                 int nowY = (int) event.getRawY();
-                int movedX = nowX - x;
-                int movedY = nowY - y;
-                x = nowX;
-                y = nowY;
+                int movedX = nowX - eventX;
+                int movedY = nowY - eventY;
+                eventX = nowX;
+                eventY = nowY;
                 params.x = params.x + movedX;
                 params.y = params.y + movedY;
                 windowManager.updateViewLayout(v, params);
                 break;
             case MotionEvent.ACTION_UP:
-                int screenWidth = DeviceUtil.getScreenWidth();
-
-                int sideX;
-                if (event.getRawX() > screenWidth / 2) {
-                    sideX = screenWidth - v.getWidth();
+                double moveDistance = Math.sqrt((downX - eventX) * (downX - eventX) + (downY - eventY) * (downY - eventY));
+                if (moveDistance <= performClickDistance) {
+                    v.performClick();
                 } else {
-                    sideX = 0;
+                    int screenWidth = DeviceUtil.getScreenWidth();
+                    int sideX;
+                    if (event.getRawX() > screenWidth / 2) {
+                        sideX = screenWidth - v.getWidth();
+                    } else {
+                        sideX = 0;
+                    }
+                    updatePositionWithAnimation(v, (int) event.getRawX() - v.getWidth() / 2, sideX);
                 }
-                updatePositionWithAnimation(v, (int) event.getRawX() - v.getWidth() / 2, sideX);
                 break;
         }
         return true;

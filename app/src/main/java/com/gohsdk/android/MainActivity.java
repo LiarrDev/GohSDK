@@ -3,10 +3,12 @@ package com.gohsdk.android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.gohsdk.core.GohSDK;
 import com.gohsdk.core.IPlatformCallback;
 import com.gohsdk.ui.GohUserCenterDialog;
+import com.gohsdk.ui.view.GohFloatingBall;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -46,6 +48,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
         } else if (view.getId() == R.id.btn_user_center) {
             GohUserCenterDialog dialog = new GohUserCenterDialog(this);
             dialog.show();
+        } else if (view.getId() == R.id.btn_float_ball) {
+            GohFloatingBall ball = new GohFloatingBall();
+            ball.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "click", Toast.LENGTH_SHORT).show();
+                }
+            });
+            ball.show();
         }
     }
 
