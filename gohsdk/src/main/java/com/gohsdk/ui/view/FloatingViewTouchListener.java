@@ -13,7 +13,7 @@ public class FloatingViewTouchListener implements View.OnTouchListener {
     private final WindowManager windowManager;
     private int eventX, eventY;
     private int downX, downY;
-    private final float performClickDistance = 8F;
+    private final static float PERFORM_CLICK_DISTANCE = 8F;
 
     public FloatingViewTouchListener(WindowManager.LayoutParams params, WindowManager windowManager) {
         this.params = params;
@@ -41,18 +41,18 @@ public class FloatingViewTouchListener implements View.OnTouchListener {
                 windowManager.updateViewLayout(v, params);
                 break;
             case MotionEvent.ACTION_UP:
-                double moveDistance = Math.sqrt((downX - eventX) * (downX - eventX) + (downY - eventY) * (downY - eventY));
-                if (moveDistance <= performClickDistance) {
+                double moveDistance = Math.sqrt(Math.pow((downX - eventX), 2) + Math.pow((downY - eventY), 2));
+                if (moveDistance <= PERFORM_CLICK_DISTANCE) {
                     v.performClick();
                 } else {
                     int screenWidth = DeviceUtil.getScreenWidth();
                     int sideX;
-                    if (event.getRawX() > screenWidth / 2) {
+                    if (event.getRawX() > screenWidth / 2f) {
                         sideX = screenWidth - v.getWidth();
                     } else {
                         sideX = 0;
                     }
-                    updatePositionWithAnimation(v, (int) event.getRawX() - v.getWidth() / 2, sideX);
+                    updatePositionWithAnimation(v, (int) (event.getRawX() - event.getX()), sideX);
                 }
                 break;
         }
