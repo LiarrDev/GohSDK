@@ -21,7 +21,7 @@ public class GohUserCenterDialog extends AlertDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View rootView = View.inflate(getContext(), ResourceUtil.getLayoutId("goh_user_center_dialog"), null);
+        View rootView = View.inflate(getContext(), ResourceUtil.getLayoutId("goh_dialog_user_center"), null);
         setContentView(rootView);
 
         Window window = getWindow();
@@ -52,6 +52,9 @@ public class GohUserCenterDialog extends AlertDialog {
     public void show() {
         super.show();
         int flag = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        getWindow().getDecorView().setSystemUiVisibility(flag);
+        Window window = getWindow();
+        if (window != null) {
+            window.getDecorView().setSystemUiVisibility(flag);
+        }
     }
 }

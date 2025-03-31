@@ -2,4 +2,5 @@
 <resources>
     <color name="gohPrimaryDark">#DD5555</color>
     <color name="gohWhite">#FFFFFF</color>
+    <color name="goh_color_acacac">#ACACAC</color>
 </resources>

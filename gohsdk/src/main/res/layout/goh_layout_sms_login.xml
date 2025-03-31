@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_mobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/goh_shape_radius_16_stroke_1"
+        android:hint="手机号"
+        android:inputType="phone"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@color/goh_color_acacac"
+        tools:text="123" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_sms_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/goh_shape_radius_16_stroke_1"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/goh_color_acacac"
+            tools:text="asdfa" />
+
+        <Button
+            android:id="@+id/btn_get_sms"
+            android:layout_width="96dp"
+            android:layout_height="42dp"
+            android:background="@drawable/goh_shape_radius_16"
+            android:text="@string/goh_get_sms_code"
+            android:textColor="@android:color/white"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_sms_login"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/goh_shape_radius_16"
+        android:text="@string/goh_login"
+        android:textColor="@color/gohWhite"
+        android:textSize="16dp" />
+</LinearLayout>

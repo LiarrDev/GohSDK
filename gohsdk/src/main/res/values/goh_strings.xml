@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="goh_account_login">账号登录</string>
+    <string name="goh_account_register">账号注册</string>
+    <string name="goh_mobile_login">手机登录</string>
+    <string name="goh_get_sms_code">获取验证码</string>
+    <string name="goh_login">登录</string>
+    <string name="goh_register">注册</string>
+</resources>
