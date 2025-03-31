@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.dialog.GohLoginDialog">
 
     <EditText
         android:id="@+id/et_login_account"
@@ -49,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginVertical="8dp"
+        android:padding="8dp"
         android:text="@string/goh_account_register"
         android:textColor="@color/goh_color_acacac"
         android:textSize="14dp" />

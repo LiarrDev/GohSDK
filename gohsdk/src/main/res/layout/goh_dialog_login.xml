@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".ui.dialog.GohLoginDialog">
 
     <RadioGroup
         android:id="@+id/radio_group"

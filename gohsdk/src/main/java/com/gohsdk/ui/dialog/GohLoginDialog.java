@@ -53,7 +53,7 @@ public class GohLoginDialog extends GohBaseDialog {
             @Override
             public void onClick(View v) {
                 isRegister = true;
-                rbAccount.setText("账号注册");
+                rbAccount.setText(ResourceUtil.getStringId("goh_account_register"));
                 showAccountRegisterLayout();
             }
         });
@@ -68,7 +68,7 @@ public class GohLoginDialog extends GohBaseDialog {
             @Override
             public void onClick(View v) {
                 isRegister = false;
-                rbAccount.setText("账号登录");
+                rbAccount.setText(ResourceUtil.getStringId("goh_account_login"));
                 showAccountLoginLayout();
             }
         });
