@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.gohsdk.entities.GohGameConfig;
+import com.gohsdk.net.GohRepository;
 import com.gohsdk.settings.GlobalSettings;
 import com.gohsdk.ui.dialog.GohAgreementDialog;
 import com.gohsdk.utils.LogUtil;
@@ -15,6 +16,7 @@ public abstract class GohSDKCore {
     protected Activity activity;
     protected IPlatformCallback callback;
     public GohGameConfig config;
+    private final GohRepository repository = new GohRepository();
     private final Gson gson = new Gson();
 
 
@@ -28,7 +30,7 @@ public abstract class GohSDKCore {
             GohAgreementDialog dialog = new GohAgreementDialog(activity);
             dialog.show();
         } else {
-            requestPermissions();
+
         }
         initConfig();
 
@@ -36,6 +38,7 @@ public abstract class GohSDKCore {
             this.callback.onInit(GohConstants.Code.SUCCESS, new Bundle());  // TODO: 所有配置加载成功后
         }
     }
+
 
     private void requestPermissions() {
         // TODO
@@ -45,6 +48,8 @@ public abstract class GohSDKCore {
     private void initConfig() {
         try {
             config = gson.fromJson(ResourceUtil.readAssets2String(GohConstants.GOH_GAME_CONFIG_FILE), GohGameConfig.class);
+            LogUtil.e("config: " + config);
+            repository.init(config);
         } catch (Exception e) {
             e.printStackTrace();
         }

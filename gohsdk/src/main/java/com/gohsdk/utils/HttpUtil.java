@@ -4,7 +4,10 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.gohsdk.net.GohBaseApi;
+
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,7 +35,7 @@ public class HttpUtil {
         }
     }
 
-    public static void doGet(final String requestUrl, final Map<String, String> params, final Callback callback) {
+    public static void get(final String requestUrl, final Map<String, String> params, final Callback callback) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -51,6 +54,68 @@ public class HttpUtil {
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
                     connection.setRequestMethod("GET");
+                    InputStream in = connection.getInputStream();
+                    reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        handleResponse(callback, response.toString());
+                    } else {
+                        handleError(callback, responseCode, new Exception("Request Failed, Code: " + responseCode));
+                    }
+                } catch (Exception e) {
+                    handleError(callback, 0, e);
+                    e.printStackTrace();
+                } finally {
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (connection != null) {
+                        connection.disconnect();
+                    }
+                }
+            }
+        });
+    }
+
+    public static void post(GohBaseApi api, final Map<String, String> params, final Callback callback) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection connection = null;
+                BufferedReader reader = null;
+                try {
+                    URL url = new URL(api.getUrl());
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setConnectTimeout(8000);
+                    connection.setReadTimeout(8000);
+                    connection.setRequestMethod("POST");
+                    connection.setRequestProperty("Accept-Encoding", "identity");
+                    DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+                    StringBuilder sb = new StringBuilder();
+                    String body = null;
+                    if (params != null) {
+                        for (Map.Entry<String, String> entry : params.entrySet()) {
+                            sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+                        }
+                    }
+                    if (sb.toString().endsWith("&")) {
+                        sb.deleteCharAt(sb.length() - 1);
+                        body = sb.toString();
+                    }
+                    if (body != null) {
+                        out.writeBytes(body);
+                    }
+                    out.flush();
+                    out.close();
                     InputStream in = connection.getInputStream();
                     reader = new BufferedReader(new InputStreamReader(in));
                     StringBuilder response = new StringBuilder();

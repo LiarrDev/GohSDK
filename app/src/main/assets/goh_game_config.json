@@ -1,4 +1,12 @@
 {
-  "gameId": "",
+  "gid": 0,
+  "pid": 1,
+  "areaid": 1,
+  "osid": 1,
+  "client": 1,
+  "pkid": 1,
+  "pcid": 1,
+  "cid": 1,
+  "adid": 1,
   "sdkVersion": "1.0.0"
 }
