@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+import com.gohsdk.net.GohNet;
+
 /**
  * SDK 内部 Application，
  * 对 CP 和渠道应使用 GohApplication
@@ -17,6 +19,7 @@ public class GohBaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        GohNet.init(context);
     }
 
     public static Context getContext() {

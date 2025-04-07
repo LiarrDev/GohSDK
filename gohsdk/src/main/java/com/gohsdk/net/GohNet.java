@@ -1,74 +1,76 @@
 package com.gohsdk.net;
 
-// TODO: 改用 volley
+import android.content.Context;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.gohsdk.utils.LogUtil;
+
+import org.json.JSONObject;
+
+import java.util.Map;
+
 public class GohNet {
 
- /*   private static final OkHttpClient client = new OkHttpClient();
+    private static RequestQueue queue;
 
-
-    public static void post(GohBaseApi api, Map<String, String> params, Callback callback) {
-        FormBody.Builder builder = new FormBody.Builder();
-        if (params != null) {
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                builder.add(entry.getKey(), entry.getValue());
-            }
-        }
-        RequestBody requestBody = builder.build();
-        Request request = new Request.Builder()
-                .url(api.getUrl())
-                .post(requestBody)
-                .build();
-        client.newCall(request).enqueue(new okhttp3.Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                ResponseBody responseBody = response.body();
-                if (responseBody != null) {
-                    callback.onResponse(responseBody.string());
-                } else {
-                    callback.onError(response.code(), new IOException("response body null!"));
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                callback.onError(-1, e);
-            }
-        });
+    public static void init(Context context) {
+        queue = Volley.newRequestQueue(context);
     }
-*/
-    /*public static void post(GohBaseApi api, String json, Callback callback) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
-//        RequestBody requestBody = RequestBody.create( MediaType.get("application/json; charset=utf-8"),json);
 
-        Request request = new Request.Builder()
-                .url(api.getUrl())
-                .post(requestBody)
-                .build();
-        client.newCall(request).enqueue(new okhttp3.Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                ResponseBody responseBody = response.body();
-                if (responseBody != null) {
-                    callback.onResponse(responseBody.string());
-                } else {
-                    callback.onError(response.code(), new IOException("response body null!"));
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                callback.onError(-1, e);
-            }
-        });
+    public static void post(GohBaseApi api, JSONObject json, Callback callback) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                api.getUrl(),
+                json,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        callback.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error);
+                    }
+                });
+        queue.add(jsonObjectRequest);
     }
-*/
+
+    public static void post(GohBaseApi api, Map<String, String> map, Callback callback) {
+        StringRequest postRequest = new StringRequest(
+                Request.Method.POST,
+                api.getUrl(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                return map;
+            }
+        };
+        queue.add(postRequest);
+    }
+
     public interface Callback {
 
-        void onResponse(String response);
+        void onResponse(JSONObject response);
 
-        default void onError(int responseCode, Exception e) {
+        default void onError(Exception e) {
+            LogUtil.e(e.getMessage());
         }
     }
 }
